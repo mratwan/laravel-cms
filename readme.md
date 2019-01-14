@@ -21,16 +21,14 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 
 Laravel is accessible, yet powerful, providing tools needed for large, robust applications.
 
-## Learning Laravel
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of any modern web application framework, making it a breeze to get started learning the framework.
-
-If you're not in the mood to read, [Laracasts](https://laracasts.com) contains over 1100 video tutorials on a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
-
-
-## Laravel CMS
+## About Laravel CMS
 
 Thank you for considering contributing to the Laravel CMS! This is a Laravel CMS made with [Vuejs](https://vuejsorg).
+
+## Learning Laravel CMS
+
+Laravel CMS has the most extensive and thorough [documentation](https://mratwan.com/web/laravel/laravel-cms).
 
 
 ## License
