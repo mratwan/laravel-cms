@@ -73,36 +73,28 @@
                     
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-cogs"></i>
+                            <i class="nav-icon fas fa-user"></i>
                             <p>
-                                Settings
+                                Users
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <router-link to="/users" class="nav-link">
                                     <i class="fa fa-circle-o nav-icon"></i>
-                                    <p>Active Page</p>
-                                </a>
+                                    <p>All Users</p>
+                                </router-link>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <router-link to="/profile" class="nav-link">
                                     <i class="fa fa-circle-o nav-icon"></i>
-                                    <p>Inactive Page</p>
-                                </a>
+                                    <p>My Profile</p>
+                                </router-link>
                             </li>
                         </ul>
                     </li>
 
-                    <li class="nav-item">
-                        <router-link to="/profile" class="nav-link">
-                            <i class="nav-icon fas fa-user"></i>
-                            <p>
-                                Profile
-                            </p>
-                        </router-link>
-                    </li>
                     <li class="nav-item">
                         <a href="{{ route('logout') }}" class="nav-link" 
                         onclick="event.preventDefault();document.getElementById('logout-form').submit();">
