@@ -28,7 +28,7 @@ Thank you for considering contributing to the Laravel CMS! This is a Laravel CMS
 
 ## Learning Laravel CMS
 
-Laravel CMS has the most extensive and thorough [documentation](https://mratwan.com/web/laravel/laravel-cms).
+Laravel CMS has the most extensive and thorough [documentation](https://mratwan.com/laravel-cms).
 
 
 ## License
