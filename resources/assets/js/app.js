@@ -11,9 +11,9 @@ window.Vue = require('vue');
 import moment from 'moment'
 import { Form, HasError, AlertError } from 'vform'
 
-import swal from 'sweetalert2'
-window.swal = swal
-const toast = swal.mixin({
+import Swal from 'sweetalert2'
+window.Swal = Swal
+const toast = Swal.mixin({
     toast: true,
     position: 'top-end',
     showConfirmButton: false,
@@ -55,6 +55,7 @@ Vue.filter('formattedDate', function(created){
     return moment(created).format('MMMM Do YYYY');
 });
 
+window.Fire = new Vue()
 
 /**
  * The following block of code may be used to automatically register your
