@@ -7,11 +7,9 @@
                         <h3 class="card-title">Users List</h3>
 
                         <div class="card-tools">
-                            <button class="btn btn-success" data-toggle="modal" data-target="#addNew">Add New <i
-                                    class="fas fa-user-plus"></i></button>
+                            <button class="btn btn-success" @click="newModal()">Add New <i class="fas fa-user-plus"></i></button>
                         </div>
                     </div>
-                    <!-- /.card-header -->
                     <div class="card-body table-responsive p-0">
                         <table class="table table-hover">
                             <tbody>
@@ -30,21 +28,18 @@
                                     <td>{{ user.type | upText }}</td>
                                     <td>{{ user.created_at | formattedDate }}</td>
                                     <td>
-                                        <a href="#" class="blue"><i class="fas fa-edit"></i> Edit</a> /
+                                        <a href="#" class="blue" @click="editModal(user)"><i class="fas fa-edit"></i> Edit</a> /
                                         <a href="#" class="red" @click="deleteUser(user.id)"><i class="fas fa-trash"></i> Delete</a>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                    <!-- /.card-body -->
                 </div>
-                <!-- /.card -->
             </div>
         </div>
 
-        <!-- Modal -->
-        <div class="modal fade" id="addNew" tabindex="-1" role="dialog" aria-labelledby="addNewLabel"
+        <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModalLabel"
              aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -54,7 +49,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form @submit.prevent="createUser">
+                    <form @submit.prevent="editmode ? createUser() : updateUser()">
                         <div class="modal-body">
                             <div class="form-group">
                                 <label>Name <span class="red">*</span></label>
@@ -108,6 +103,7 @@
     export default {
         data() {
             return {
+                editmode: false,
                 users: {},
                 form: new Form({
                     name: '',
@@ -123,13 +119,21 @@
             loadUsers() {
                 axios.get('api/user').then(({ data }) => ( this.users = data.data ) )
             },
+            newModal() {
+                this.form.reset()
+                $('#userModal').modal('show')
+            },
+            editModal(user) {
+                this.form.reset()
+                $('#userModal').modal('show')
+                this.form.fill(user)
+            },
             createUser() {
-                this.$Progress.start();
-                async
+                this.$Progress.start()
                 this.form.post('api/user')
                     .then(() => {
-                        Fire.$emit('AfterCreated');
-                        $('#addNew').modal('hide');
+                        Fire.$emit('AfterCreated')
+                        $('#userModal').modal('hide')
                         toast({
                             type: 'success',
                             title: 'User Created successfully'
@@ -139,6 +143,9 @@
                     .catch(() => {
 
                     })
+            },
+            updateUser(id) {
+
             },
             deleteUser(id) {
                 Swal({

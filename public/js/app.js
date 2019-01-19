@@ -1980,14 +1980,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      editmode: false,
       users: {},
       form: new Form({
         name: '',
@@ -2008,11 +2004,19 @@ __webpack_require__.r(__webpack_exports__);
         return _this.users = data.data;
       });
     },
+    newModal: function newModal() {
+      this.form.reset();
+      $('#addNew').modal('show');
+    },
+    editModal: function editModal(user) {
+      this.form.reset();
+      $('#addNew').modal('show');
+      this.form.fill(user);
+    },
     createUser: function createUser() {
       var _this2 = this;
 
       this.$Progress.start();
-      async;
       this.form.post('api/user').then(function () {
         Fire.$emit('AfterCreated');
         $('#addNew').modal('hide');
@@ -2024,6 +2028,7 @@ __webpack_require__.r(__webpack_exports__);
         _this2.$Progress.finish();
       }).catch(function () {});
     },
+    updateUser: function updateUser(id) {},
     deleteUser: function deleteUser(id) {
       var _this3 = this;
 
@@ -58065,14 +58070,34 @@ var render = function() {
     _c("div", { staticClass: "row mt-5" }, [
       _c("div", { staticClass: "col-12" }, [
         _c("div", { staticClass: "card" }, [
-          _vm._m(0),
+          _c("div", { staticClass: "card-header" }, [
+            _c("h3", { staticClass: "card-title" }, [_vm._v("Users List")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-tools" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-success",
+                  on: {
+                    click: function($event) {
+                      _vm.newModal()
+                    }
+                  }
+                },
+                [
+                  _vm._v("Add New "),
+                  _c("i", { staticClass: "fas fa-user-plus" })
+                ]
+              )
+            ])
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "card-body table-responsive p-0" }, [
             _c("table", { staticClass: "table table-hover" }, [
               _c(
                 "tbody",
                 [
-                  _vm._m(1),
+                  _vm._m(0),
                   _vm._v(" "),
                   _vm._l(_vm.users, function(user) {
                     return _c("tr", { key: user.id }, [
@@ -58089,7 +58114,22 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("td", [
-                        _vm._m(2, true),
+                        _c(
+                          "a",
+                          {
+                            staticClass: "blue",
+                            attrs: { href: "#" },
+                            on: {
+                              click: function($event) {
+                                _vm.editModal(user)
+                              }
+                            }
+                          },
+                          [
+                            _c("i", { staticClass: "fas fa-edit" }),
+                            _vm._v(" Edit")
+                          ]
+                        ),
                         _vm._v(" /\n                                    "),
                         _c(
                           "a",
@@ -58140,7 +58180,7 @@ var render = function() {
           },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(3),
+              _vm._m(1),
               _vm._v(" "),
               _c(
                 "form",
@@ -58148,7 +58188,7 @@ var render = function() {
                   on: {
                     submit: function($event) {
                       $event.preventDefault()
-                      return _vm.createUser($event)
+                      _vm.editmode ? _vm.createUser() : _vm.updateUser()
                     }
                   }
                 },
@@ -58158,7 +58198,7 @@ var render = function() {
                       "div",
                       { staticClass: "form-group" },
                       [
-                        _vm._m(4),
+                        _vm._m(2),
                         _vm._v(" "),
                         _c("input", {
                           directives: [
@@ -58200,7 +58240,7 @@ var render = function() {
                       "div",
                       { staticClass: "form-group" },
                       [
-                        _vm._m(5),
+                        _vm._m(3),
                         _vm._v(" "),
                         _c("input", {
                           directives: [
@@ -58240,7 +58280,7 @@ var render = function() {
                       "div",
                       { staticClass: "form-group" },
                       [
-                        _vm._m(6),
+                        _vm._m(4),
                         _vm._v(" "),
                         _c(
                           "select",
@@ -58344,7 +58384,7 @@ var render = function() {
                       "div",
                       { staticClass: "form-group" },
                       [
-                        _vm._m(7),
+                        _vm._m(5),
                         _vm._v(" "),
                         _c("input", {
                           directives: [
@@ -58383,7 +58423,7 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _vm._m(8)
+                  _vm._m(6)
                 ]
               )
             ])
@@ -58394,25 +58434,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("h3", { staticClass: "card-title" }, [_vm._v("Users List")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card-tools" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-success",
-            attrs: { "data-toggle": "modal", "data-target": "#addNew" }
-          },
-          [_vm._v("Add New "), _c("i", { staticClass: "fas fa-user-plus" })]
-        )
-      ])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -58429,15 +58450,6 @@ var staticRenderFns = [
       _c("th", [_vm._v("Registered At")]),
       _vm._v(" "),
       _c("th", [_vm._v("Modify")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("a", { staticClass: "blue", attrs: { href: "#" } }, [
-      _c("i", { staticClass: "fas fa-edit" }),
-      _vm._v(" Edit")
     ])
   },
   function() {
