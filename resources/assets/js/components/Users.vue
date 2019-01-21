@@ -44,12 +44,13 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Add New</h5>
+                        <h5 class="modal-title" v-show="!editmode">Add New</h5>
+                        <h5 class="modal-title" v-show="editmode">Update User's Info</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form @submit.prevent="editmode ? createUser() : updateUser()">
+                    <form @submit.prevent="editmode ? updateUser() : createUser()">
                         <div class="modal-body">
                             <div class="form-group">
                                 <label>Name <span class="red">*</span></label>
@@ -89,7 +90,8 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-success">Create</button>
+                            <button v-show="editmode" type="submit" class="btn btn-primary">Update</button>
+                            <button v-show="!editmode" type="submit" class="btn btn-success">Create</button>
                         </div>
                     </form>
                 </div>
@@ -106,6 +108,7 @@
                 editmode: false,
                 users: {},
                 form: new Form({
+                    id: '',
                     name: '',
                     email: '',
                     password: '',
@@ -120,10 +123,12 @@
                 axios.get('api/user').then(({ data }) => ( this.users = data.data ) )
             },
             newModal() {
+                this.editmode = false
                 this.form.reset()
                 $('#userModal').modal('show')
             },
             editModal(user) {
+                this.editmode = true
                 this.form.reset()
                 $('#userModal').modal('show')
                 this.form.fill(user)
@@ -145,7 +150,17 @@
                     })
             },
             updateUser(id) {
-
+                this.$Progress.start()
+                this.form.put('api/user/'+this.form.id)
+                    .then(() => {
+                        $('#userModal').modal('hide')
+                        Swal('Updated!', 'Informations has been updated.', 'success')
+                        this.$Progress.finish()
+                        Fire.$emit('AfterCreated')
+                    })
+                    .catch(() => {
+                        Swal('Failed!!', 'There was somthing wronge.', 'warning')
+                    })
             },
             deleteUser(id) {
                 Swal({
