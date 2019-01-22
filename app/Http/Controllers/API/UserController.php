@@ -19,9 +19,11 @@ class UserController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function index()
     {
+        $this->authorize('isAdmin');
         return User::latest()->paginate(10);
     }
 
@@ -93,10 +95,10 @@ class UserController extends Controller
             $name = time().'.' . explode('/', explode(':', substr($request->photo, 0, strpos($request->photo, ';')))[1])[1];
             Image::make($request->photo)->save(public_path('images/avatars/').$name);
             $request->merge(['photo' => $name]);
-            $userPhoto = public_path('img/profile/').$currentPhoto;
+            $userPhoto = public_path('images/avatars/').$currentPhoto;
             if(file_exists($userPhoto))
             {
-                @unlink($userPhoto);
+                unlink($userPhoto);
             }
         }
         if(!empty($request->password)){
@@ -129,8 +131,9 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  int $id
+     * @return array
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function destroy($id)
     {

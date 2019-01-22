@@ -70,7 +70,7 @@
                             </p>
                         </router-link>
                     </li>
-                    
+
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-user"></i>
@@ -80,12 +80,14 @@
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
+                            @can('isAdmin')
                             <li class="nav-item">
                                 <router-link to="/users" class="nav-link">
                                     <i class="fa fa-circle-o nav-icon"></i>
                                     <p>All Users</p>
                                 </router-link>
                             </li>
+                            @endcan
                             <li class="nav-item">
                                 <router-link to="/profile" class="nav-link">
                                     <i class="fa fa-circle-o nav-icon"></i>
@@ -95,6 +97,7 @@
                         </ul>
                     </li>
 
+                    @can('isAdmin')
                     <li class="nav-item">
                         <router-link to="/developer" class="nav-link">
                             <i class="nav-icon fas fa-cogs"></i>
@@ -103,6 +106,7 @@
                             </p>
                         </router-link>
                     </li>
+                    @endcan
 
                     <li class="nav-item">
                         <a href="{{ route('logout') }}" class="nav-link" 
@@ -144,6 +148,11 @@
 
 </div>
 <!-- ./wrapper -->
+@auth
+    <script>
+        window.user = @json(auth()->user())
+    </script>
+@endauth
 
 <!-- REQUIRED SCRIPTS -->
 
