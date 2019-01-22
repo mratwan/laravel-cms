@@ -77,8 +77,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Bio</label>
-                                <textarea v-model="form.bio" name="bio" class="form-control" placeholder="User's bio"
-                                          :class="{ 'is-invalid': form.errors.has('bio') }"></textarea>
+                                <textarea v-model="form.bio" name="bio" class="form-control" placeholder="User's bio" :class="{ 'is-invalid': form.errors.has('bio') }"></textarea>
                                 <has-error :form="form" field="bio"></has-error>
                             </div>
                             <div class="form-group">
