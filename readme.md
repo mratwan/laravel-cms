@@ -1,12 +1,3 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
-
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
-
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
@@ -30,6 +21,21 @@ Thank you for considering contributing to the Laravel CMS! This is a Laravel CMS
 
 Laravel CMS has the most extensive and thorough [documentation](https://mratwan.com/laravel-cms).
 
+## Installation
+
+It's just like any other Laravel project. Basically here is how you use it for yourself. (it's not completed yet) 
+
+* Clone the repo ` git clone https://github.com/mratwan/laravel-cms.git `
+* `cd ` to project folder. 
+* Run ` composer install `
+* Save as the `.env.example` to `.env` and set your database information.
+* Run ` php artisan key:generate` to generate the app key.
+* Run ` npm install ` 
+* Run ` php artisan migrate ` 
+* Go to register page and register new user.
+* Go to phpMyAdmin and edit registered user type to `admin`
+* Run `php artisan passport:install` and save its keys.
+* Done !!! Enjoy Customizing and building awesome app 
 
 ## License
 
