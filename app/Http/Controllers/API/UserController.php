@@ -24,7 +24,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        if ( Gate::allows('isAdmin') ) {
+        if ( \Gate::allows('isAdmin') ) {
             return User::latest()->paginate(10);
         }
     }
