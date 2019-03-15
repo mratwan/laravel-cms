@@ -1,10 +1,12 @@
 {
-    "name": "laravel/laravel",
+    "name": "mratwan/laravel-cms",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "The Laravel CMS with Vuejs and Reactjs.",
     "keywords": [
         "framework",
-        "laravel"
+        "laravel",
+        "vuejs",
+        "reactjs"
     ],
     "license": "MIT",
     "require": {
